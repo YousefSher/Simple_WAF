@@ -10,10 +10,10 @@ if (isset($_REQUEST['email'])) {
         $_SESSION['loggedin'] = true;
         $_SESSION['username'] = $row['name'];
         $_SESSION['id'] = $row['id'];
-        header("Location: /Simple_WAF/Code/index.php?page=home");
+        header("Location: /WAF/Code/index.php?page=home");
         exit;
     } else {
-        header("Location: /Simple_WAF/Code/index.php?page=login&error=user");
+        header("Location: /WAF/Code/index.php?page=login&error=user");
         exit;
     }
 }
@@ -28,8 +28,8 @@ if (isset($_REQUEST['email'])) {
     <title>Login Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="/Simple_WAF/Code/pages/CSS/bootstrap.min.css">
-    <link rel="stylesheet" href="/Simple_WAF/Code/pages/CSS/style.css">
+    <link rel="stylesheet" href="/WAF/Code/pages/CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="/WAF/Code/pages/CSS/style.css">
 </head>
 
 <body class="bg-light">
@@ -64,8 +64,8 @@ if (isset($_REQUEST['email'])) {
     </form>
 </div>
 
-<script src="/Simple_WAF/Code/pages/JS/bootstrap.min.js"></script>
-<script src="/Simple_WAF/Code/pages/JS/main.js"></script>
+<script src="/WAF/Code/pages/JS/bootstrap.min.js"></script>
+<script src="/WAF/Code/pages/JS/main.js"></script>
 
 </body>
 </html>

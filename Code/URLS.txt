@@ -1,2 +1,2 @@
-Login: http://localhost/Simple_WAF/Code/index.php?page=login
-SQL injection: http://localhost/Simple_WAF/Code/index.php?page=login&email=%27%20OR%201=1--+
+Login: http://localhost/WAF/Code/index.php?page=login
+SQL injection: http://localhost/WAF/Code/index.php?page=login&email=%27%20OR%201=1--+

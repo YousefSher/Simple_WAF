@@ -1,5 +1,5 @@
 <?php
-require_once '../../models/Course.php';
+include __DIR__ . '/../../models/Course.php';
 
 $results = [];
 $search_term = '';
