@@ -1,0 +1,30 @@
+CREATE DATABASE courses_db;
+USE courses_db;
+CREATE TABLE admin (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    password VARCHAR(100) NOT NULL
+);
+INSERT INTO admin (username, password) VALUES ('admin', '123');
+CREATE TABLE student (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100),
+    password VARCHAR(100) NOT NULL,
+    course_id INT
+);
+INSERT INTO student (name, email,password, course_id) VALUES
+('John Doe', 'john@example.com', "123", 1),
+('Jane Smith', 'jane@example.com', "123", 2);
+CREATE TABLE course (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(100) NOT NULL,
+    content_path VARCHAR(100) NOT NULL,
+    description TEXT
+);
+INSERT INTO course (title, content_path, description) VALUES
+('Python', 'D:/contents/Python.docx', 'Python programming basics'),
+('Web Security','D:/contents/Web_sSecurity.docx', 'SQLi, XSS, SSRF');
+ALTER TABLE student
+ADD CONSTRAINT fk_student_course
+FOREIGN KEY (course_id) REFERENCES course(id);
