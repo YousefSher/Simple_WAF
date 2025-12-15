@@ -1,3 +1,4 @@
+**In phpMyAdmin, go to SQL in the tab above --> copy and paste the schema --> press GO**
 CREATE DATABASE courses_db;
 USE courses_db;
 CREATE TABLE admin (
