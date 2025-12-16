@@ -22,9 +22,17 @@ if (!in_array($page, $allowedPages, true)) {
     <title>WAF Demo App</title>
     <style>
         /* Global Navigation Styles */
-        body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background-color: #f4f6f8; }
-        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f6f8;
+        }
+
         .navbar {
+            display: flex;
+            justify-content: center !important;
+            gap: 10px;
             background-color: #2c3e50;
             padding: 15px 0;
             text-align: center;
@@ -36,7 +44,6 @@ if (!in_array($page, $allowedPages, true)) {
             color: #ecf0f1;
             text-decoration: none;
             padding: 10px 20px;
-            margin: 0 5px;
             font-weight: 500;
             border-radius: 4px;
             transition: background 0.3s;
@@ -50,7 +57,9 @@ if (!in_array($page, $allowedPages, true)) {
             background-color: #3498db;
             color: white;
         }
+
     </style>
+    <link rel="stylesheet" href="/WAF/Code/pages/CSS/bootstrap.min.css">
 </head>
 <body>
 
@@ -63,6 +72,7 @@ if (!in_array($page, $allowedPages, true)) {
     </div>
 
     <?php require __DIR__ . "/pages/Public/{$page}.php"; ?>
-
+    <script src="/WAF/Code/pages/JS/bootstrap.min.js"></script>
+    <script src="/WAF/Code/pages/JS/main.js"></script>
 </body>
 </html>

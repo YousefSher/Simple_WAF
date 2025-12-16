@@ -15,27 +15,15 @@ if (isset($_REQUEST['email'], $_REQUEST['pass'])) {
         $_SESSION['loggedin'] = true;
         $_SESSION['username'] = $row['name'];
 
-        header("Location: /WAF/Code/index.php?page=home");
+        header("Location: ?page=home");
         exit;
     } else {
-        header("Location: /WAF/Code/index.php?page=login&error=user");
+        header("Location: ?page=login&error=user");
         exit;
     }
 }
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login Page</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="/WAF/Code/pages/CSS/bootstrap.min.css">
-    <link rel="stylesheet" href="/WAF/Code/pages/CSS/style.css">
-</head>
-
-<body class="bg-light">
 
 <div class="container mt-5 w-50 p-4 shadow-lg border rounded">
 
@@ -67,8 +55,3 @@ if (isset($_REQUEST['email'], $_REQUEST['pass'])) {
     </form>
 </div>
 
-<script src="/WAF/Code/pages/JS/bootstrap.min.js"></>
-<script src="/WAF/Code/pages/JS/main.js"></script>
-
-</body>
-</html>
