@@ -1,5 +1,6 @@
 <?php
-include __DIR__ . '/../../models/Course.php';
+
+include_once __DIR__ . '/../../models/Course.php';
 
 $results = [];
 $search_term = '';
@@ -11,32 +12,27 @@ if (isset($_GET['query'])) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Search Courses</title>
-    <style>
-    /* 1. Base Setup */
-    body {
+<style>
+    .search-container {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #f4f6f8;
         color: #333;
-        margin: 0;
-        padding: 40px;
+        /* Center the container and add spacing from the navbar */
+        margin: 40px auto;
+        padding: 0 20px;
         display: flex;
         flex-direction: column;
         align-items: center;
+        max-width: 800px;
+        width: 100%;
     }
 
-    /* 2. Page Title */
     h1 {
         color: #2c3e50;
         margin-bottom: 30px;
     }
 
-    /* 3. Search Form Styling */
-    form {
+    /* Scoped form styling to ensure it fits the container */
+    .search-container form {
         width: 100%;
         max-width: 600px;
         display: flex;
@@ -45,6 +41,7 @@ if (isset($_GET['query'])) {
         padding: 20px;
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        box-sizing: border-box; /* Ensures padding doesn't break width */
     }
 
     input[type="text"] {
@@ -125,19 +122,21 @@ if (isset($_GET['query'])) {
         margin-top: 20px;
     }
 </style>
-</head>
-<body>
+
+<div class="search-container">
 
     <h1>Find a Course</h1>
 
     <form action="" method="GET">
-        <input type="text" name="query" placeholder="Search..." value="<?php echo $search_term; ?>">
+        <input type="hidden" name="page" value="search">
+        
+        <input type="text" name="query" placeholder="Search..." value="<?php echo htmlspecialchars($search_term); ?>">
         <button type="submit">Search</button>
     </form>
 
     <?php if ($search_term): ?>
-        <hr>
-        <h3>Results for: <?php echo $search_term; ?></h3>
+        
+        <h3>Results for: <?php echo htmlspecialchars($search_term); ?></h3>
 
         <div class="results">
             <?php if (!empty($results)): ?>
@@ -148,10 +147,9 @@ if (isset($_GET['query'])) {
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
-                <p>No courses found.</p>
+                <p class="no-results">No courses found.</p>
             <?php endif; ?>
         </div>
     <?php endif; ?>
 
-</body>
-</html>
+</div>

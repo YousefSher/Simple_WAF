@@ -30,119 +30,104 @@ if (isset($_GET['file'])) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Download Syllabus</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f6f8;
-            color: #333;
-            margin: 0;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+<style>
+    .download-container {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
+        margin: 40px auto; 
+        padding: 0 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 800px;
+    }
 
-        h1 {
-            color: #2c3e50;
-            margin-bottom: 30px;
-        }
+    h1 {
+        color: #2c3e50;
+        margin-bottom: 30px;
+    }
 
-        .container {
-            width: 100%;
-            max-width: 600px;
-        }
+    .error-box {
+        background-color: #fee;
+        color: #c0392b;
+        border: 1px solid #f5c6cb;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        width: 100%;
+        text-align: center;
+    }
 
-        .error-box {
-            background-color: #fee;
-            color: #c0392b;
-            border: 1px solid #f5c6cb;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            width: 100%;
-            text-align: center;
-        }
+    .file-card {
+        background: white;
+        padding: 20px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        border-left: 5px solid #27ae60;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: transform 0.2s;
+        width: 100%; /* Ensure cards fill the container */
+    }
 
-        .file-card {
-            background: white;
-            padding: 20px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            border-left: 5px solid #27ae60;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: transform 0.2s;
-        }
+    .file-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
 
-        .file-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-        }
+    .file-info h4 {
+        margin: 0 0 5px 0;
+        color: #2c3e50;
+        font-size: 1.1rem;
+    }
 
-        .file-info h4 {
-            margin: 0 0 5px 0;
-            color: #2c3e50;
-            font-size: 1.1rem;
-        }
+    .file-info p {
+        margin: 0;
+        color: #7f8c8d;
+        font-size: 0.9rem;
+    }
 
-        .file-info p {
-            margin: 0;
-            color: #7f8c8d;
-            font-size: 0.9rem;
-        }
+    .btn-download {
+        background-color: #27ae60;
+        color: white;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
 
-        .btn-download {
-            background-color: #27ae60;
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
+    .btn-download:hover {
+        background-color: #219150;
+    }
+</style>
 
-        .btn-download:hover {
-            background-color: #219150;
-        }
-    </style>
-</head>
-<body>
+<div class="download-container">
 
     <h1>Course Syllabuses</h1>
 
-    <div class="container">
-        
-        <?php if ($error_msg): ?>
-            <div class="error-box">
-                <?php echo $error_msg; ?>
-            </div>
-        <?php endif; ?>
-
-        <div class="file-card">
-            <div class="file-info">
-                <h4>Python Programming Syllabus</h4>
-                <p>Fall 2025 • PDF Format</p>
-            </div>
-            <a href="?file=python_syllabus.pdf" class="btn-download">Download</a>
+    <?php if ($error_msg): ?>
+        <div class="error-box">
+            <?php echo $error_msg; ?>
         </div>
+    <?php endif; ?>
 
-        <div class="file-card">
-            <div class="file-info">
-                <h4>Web Security Essentials</h4>
-                <p>Spring 2025 • PDF Format</p>
-            </div>
-            <a href="?file=security_intro.pdf" class="btn-download">Download</a>
+    <div class="file-card">
+        <div class="file-info">
+            <h4>Python Programming Syllabus</h4>
+            <p>Fall 2025 • PDF Format</p>
         </div>
-
-
+        <a href="?page=download&file=python_syllabus.pdf" class="btn-download">Download</a>
     </div>
 
-</body>
-</html>
+    <div class="file-card">
+        <div class="file-info">
+            <h4>Web Security Essentials</h4>
+            <p>Spring 2025 • PDF Format</p>
+        </div>
+        <a href="?page=download&file=security_intro.pdf" class="btn-download">Download</a>
+    </div>
+
+</div>
