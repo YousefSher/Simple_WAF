@@ -1,145 +1,133 @@
 <?php
-// INTENTIONALLY VULNERABLE SSRF LAB
-// No validation, no filtering, no allowlist
+$message = '';
+$syllabus_content = '';
 
-$success = '';
-$error = '';
+if (isset($_GET['syllabus_url'])) {
+    $url = $_GET['syllabus_url'];
+    
+    if (!empty($url)) {
+        // VULNERABILITY: Server-Side Request Forgery (SSRF)
+        // The server will try to connect to ANY address you give it (localhost, internal IPs, etc.)
+        $content = @file_get_contents($url);
 
-if (isset($_GET['url'])) {
-    $url = $_GET['url'];
-
-    // Server-side request (SSRF core)
-    $data = @file_get_contents($url);
-
-    if ($data !== false) {
-
-        // Ensure upload directory exists
-        $uploadDir = __DIR__ . '/uploads';
-        if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0777, true);
+        if ($content === FALSE) {
+            $message = "Error: Could not retrieve syllabus from that URL.";
+        } else {
+            $message = "Syllabus imported successfully!";
+            $syllabus_content = $content;
         }
-
-        // Save fetched content
-        file_put_contents($uploadDir . '/preview.txt', $data);
-
-        $success = "Imported content successfully from: <b>$url</b>";
-    } else {
-        $error = "Failed to fetch the provided URL.";
     }
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Import Course Content</title>
-    <link rel="stylesheet" href="../CSS/style.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f6f8;
-            padding: 40px;
-        }
 
-        .container {
-            max-width: 600px;
-            margin: auto;
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-        }
+<style>
+    .import-container {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
+        margin: 40px auto;
+        padding: 0 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 800px;
+        width: 100%;
+    }
 
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-        }
+    h1 {
+        color: #2c3e50;
+        margin-bottom: 30px;
+    }
 
-        .subtitle {
-            text-align: center;
-            color: #777;
-            margin-bottom: 25px;
-        }
+    /* Scoped form styling */
+    .import-container form {
+        width: 100%;
+        max-width: 600px;
+        display: flex;
+        gap: 10px;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        box-sizing: border-box;
+    }
 
-        input[type="text"] {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
+    input[type="text"] {
+        flex-grow: 1;
+        padding: 12px 15px;
+        border: 2px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+        transition: border-color 0.3s;
+    }
 
-        button {
-            width: 100%;
-            padding: 12px;
-            background: #3498db;
-            border: none;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
+    input[type="text"]:focus {
+        border-color: #8e44ad; /* Purple for Import page */
+        outline: none;
+    }
 
-        button:hover {
-            background: #2980b9;
-        }
+    button {
+        padding: 12px 25px;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
 
-        .success {
-            background: #e8f8f5;
-            border: 1px solid #1abc9c;
-            padding: 10px;
-            margin-bottom: 15px;
-        }
+    button:hover {
+        background-color: #2980b9;
+    }
 
-        .error {
-            background: #fdecea;
-            border: 1px solid #e74c3c;
-            padding: 10px;
-            margin-bottom: 15px;
-        }
+    h3 {
+        margin-top: 20px;
+        color: #2c3e50;
+    }
 
-        .examples {
-            margin-top: 25px;
-            font-size: 14px;
-        }
+    .preview-box {
+        margin-top: 20px;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        width: 100%;
+        max-width: 600px;
+        border-left: 5px solid #8e44ad;
+        min-height: 100px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        overflow-x: auto; /* Adds scrollbar if content is too wide */
+    }
 
-        code {
-            background: #eee;
-            padding: 4px;
-            display: inline-block;
-            margin-top: 5px;
-        }
+    pre {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        margin: 0;
+        font-family: Consolas, monospace;
+        color: #555;
+    }
+</style>
 
-    </style>
-</head>
-<body>
+<div class="import-container">
 
-<div class="container">
-    <h1>Import Course Syllabus</h1>
+    <h1>Import Remote Syllabus</h1>
+    <p style="margin-bottom: 20px; color: #666;">Enter the URL where your syllabus is hosted.</p>
 
-    <p class="subtitle">
-        Paste a URL to import course material or preview.
-    </p>
-
-    <?php if ($success): ?>
-        <div class="success"><?= $success ?></div>
-    <?php endif; ?>
-
-    <?php if ($error): ?>
-        <div class="error"><?= $error ?></div>
-    <?php endif; ?>
-
-    <form method="GET">
+    <form action="" method="GET">
         <input type="hidden" name="page" value="import">
-        <input type="text" name="url" placeholder="http://example.com/syllabus.pdf" required>
-        <button type="submit">Import</button>
+
+        <input type="text" name="syllabus_url" placeholder="http://example.com/fall2025_syllabus.txt">
+        <button type="submit">Fetch</button>
     </form>
 
-    <div class="examples">
-        <h3>Examples</h3>
-        <code>http://localhost/Content/python_syllabus.pdf</code><br>
-        <code>http://localhost/phpmyadmin/</code>
-    </div>
-</div>
+    <?php if ($message): ?>
+        <h3><?php echo $message; ?></h3>
+    <?php endif; ?>
 
-</body>
-</html>
+    <?php if ($syllabus_content): ?>
+        <div class="preview-box">
+            <h4 style="margin-top: 0; color: #8e44ad;">Syllabus Preview:</h4>
+            <pre><?php echo htmlspecialchars($syllabus_content); ?></pre>
+        </div>
+    <?php endif; ?>
+
+</div>
