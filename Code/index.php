@@ -6,7 +6,7 @@ ini_set('display_errors', 1);
 $page = $_GET['page'] ?? 'login';
 
 // 2. Define allowed pages
-$allowedPages = ['login', 'search', 'import', 'download'];
+$allowedPages = ['login', 'search', 'import', 'download','home'];
 
 // 3. Security Check
 if (!in_array($page, $allowedPages, true)) {
@@ -59,6 +59,7 @@ if (!in_array($page, $allowedPages, true)) {
         <a href="?page=search" class="<?php echo $page == 'search' ? 'active' : ''; ?>">Search (SQLi)</a>
         <a href="?page=import" class="<?php echo $page == 'import' ? 'active' : ''; ?>">Import (SSRF)</a>
         <a href="?page=download" class="<?php echo $page == 'download' ? 'active' : ''; ?>">Download (Traversal)</a>
+        <a href="?page=home" class="<?php echo $page == 'home' ? 'active' : ''; ?>">Home</a>
     </div>
 
     <?php require __DIR__ . "/pages/Public/{$page}.php"; ?>

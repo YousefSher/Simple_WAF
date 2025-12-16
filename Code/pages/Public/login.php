@@ -1,6 +1,6 @@
 <?php
 include __DIR__ . '/../../models/Student.php';
-
+$_SESSION['loggedin'] = false;
 if (isset($_REQUEST['email'], $_REQUEST['pass'])) {
 
     $email = $_REQUEST['email'];
@@ -14,9 +14,8 @@ if (isset($_REQUEST['email'], $_REQUEST['pass'])) {
 
         $_SESSION['loggedin'] = true;
         $_SESSION['username'] = $row['name'];
-        $_SESSION['id'] = $row['id'];
 
-        header("Location: /WAF/Code/index.php?page=search");
+        header("Location: /WAF/Code/index.php?page=home");
         exit;
     } else {
         header("Location: /WAF/Code/index.php?page=login&error=user");
