@@ -64,7 +64,7 @@ if (isset($_GET['file'])) {
         margin-bottom: 15px;
         border-radius: 8px;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        border-left: 5px solid #27ae60;
+        border-left: 5px solid #3498db;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -90,7 +90,7 @@ if (isset($_GET['file'])) {
     }
 
     .btn-download {
-        background-color: #27ae60;
+        background-color: #3498db;
         color: white;
         text-decoration: none;
         padding: 10px 20px;
@@ -100,7 +100,7 @@ if (isset($_GET['file'])) {
     }
 
     .btn-download:hover {
-        background-color: #219150;
+        background-color: #2980b9;
     }
 </style>
 
