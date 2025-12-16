@@ -61,7 +61,6 @@ if (!in_array($page, $allowedPages, true)) {
         .logout { margin-top: 20px !important; }
         .logout a { text-decoration: none; color: white; background-color: red; padding: 10px 20px; border-radius: 5px !important; }
     </style>
-    <link rel="stylesheet" href="/WAF/Code/pages/CSS/bootstrap.min.css">
 </head>
 <body>
 
@@ -73,8 +72,5 @@ if (!in_array($page, $allowedPages, true)) {
         <a href="?page=home" class="<?php echo $page == 'home' ? 'active' : ''; ?>">Home</a>
     </div>
     <?php require __DIR__ . "/pages/Public/{$page}.php"; ?>
-    <base href="/WAF/Code/">
-    <script src="pages/JS/bootstrap.min.js"></script>
-    <script src="pages/JS/main.js"></script>
 </body>
 </html>

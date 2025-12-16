@@ -4,7 +4,7 @@ session_start();
 // Check if user is logged in
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     // Not logged in, redirect to login page
-    header("Location: /WAF/Code/index.php?page=login");
+    header("Location: ?page=login");
     exit;
 }
 
@@ -18,7 +18,7 @@ $username = $_SESSION['username'];
     </div>
 
     <div class="logout">
-        <a href="?page=login" class="<?php echo $page == 'login' ? 'active' : ''; ?>">Log</a>
+        <a href="?page=login" class="<?php echo $page == 'login' ? 'active' : ''; ?>">Log Out</a>
     </div>
 </div>
 

@@ -28,7 +28,7 @@ if (isset($_REQUEST['email'], $_REQUEST['pass'])) {
     /* Reset and body styling */
     .login-card {
         background-color: #fff;
-        padding: 40px 30px;
+        padding: 40px;
         border-radius: 12px;
         box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         width: 100%;
@@ -49,7 +49,7 @@ if (isset($_REQUEST['email'], $_REQUEST['pass'])) {
 
     /* Input fields */
     .login-card input[type="email"],
-    .login-card input[type="password"] {
+    .login-card input[type="text"] {
         width: 100%;
         padding: 12px 15px;
         margin-bottom: 20px;
@@ -59,7 +59,7 @@ if (isset($_REQUEST['email'], $_REQUEST['pass'])) {
     }
 
     .login-card input[type="email"]:focus,
-    .login-card input[type="password"]:focus {
+    .login-card input[type="text"]:focus {
         outline: none;
         border-color: #3498db;
         box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
@@ -105,7 +105,7 @@ if (isset($_REQUEST['email'], $_REQUEST['pass'])) {
         <p>Never stop learning!</p>
         <form method="post" action="?page=login">
             <input type="email" name="email" placeholder="E-mail" required>
-            <input type="password" name="pass" placeholder="Password" required>
+            <input type="text" name="pass" placeholder="Password" required>
             <button type="submit">Log in</button>
         </form>
     </div>                                                                          
