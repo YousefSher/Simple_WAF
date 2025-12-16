@@ -1,26 +1,32 @@
 <?php
-include __DIR__ . '/../../Database/db.php';
-if (isset($_REQUEST['email'])) {
-    $email = $_REQUEST['email'];
-    //vulnerability 1
-    $sql = "SELECT * FROM student WHERE email = '$email'";
-    $result = $conn->query($sql);
-    if ($result && $result->num_rows >= 1) {
-        $row = $result->fetch_assoc();
+
+require_once __DIR__ . '/../../models/Student.php';
+
+if (isset($_POST['email'], $_POST['pass'])) {
+
+    $email = $_POST['email'];
+    $pass  = $_POST['pass'];
+
+    $student = new Student();
+    $stmt = $student->login($email, $pass);
+
+    if ($stmt && $stmt->rowCount() === 1) {
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
         $_SESSION['loggedin'] = true;
         $_SESSION['username'] = $row['name'];
         $_SESSION['id'] = $row['id'];
-        header("Location: /WAF/Code/index.php?page=home");
+
+        header("Location: /WAF/Code/index.php?page=search");
         exit;
+
     } else {
         header("Location: /WAF/Code/index.php?page=login&error=user");
         exit;
     }
 }
 ?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,7 +70,7 @@ if (isset($_REQUEST['email'])) {
     </form>
 </div>
 
-<script src="/WAF/Code/pages/JS/bootstrap.min.js"></script>
+<script src="/WAF/Code/pages/JS/bootstrap.min.js"></>
 <script src="/WAF/Code/pages/JS/main.js"></script>
 
 </body>
