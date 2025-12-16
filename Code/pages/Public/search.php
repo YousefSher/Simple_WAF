@@ -136,7 +136,7 @@ if (isset($_GET['query'])) {
 
     <?php if ($search_term): ?>
         
-        <h3>Results for: <?php echo htmlspecialchars($search_term); ?></h3>
+        <h3>Results for: <?php echo $search_term; ?></h3>
 
         <div class="results">
             <?php if (!empty($results)): ?>
