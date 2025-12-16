@@ -1,18 +1,16 @@
 <?php
+include __DIR__ . '/../../models/Student.php';
 
-require_once __DIR__ . '/../../models/Student.php';
+if (isset($_REQUEST['email'], $_REQUEST['pass'])) {
 
-if (isset($_POST['email'], $_POST['pass'])) {
-
-    $email = $_POST['email'];
-    $pass  = $_POST['pass'];
+    $email = $_REQUEST['email'];
+    $pass  = $_REQUEST['pass'];
 
     $student = new Student();
-    $stmt = $student->login($email, $pass);
+    $result = $student->login($email, $pass);
 
-    if ($stmt && $stmt->rowCount() === 1) {
-
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($result && $result->rowCount() >= 1) {
+        $row = $result->fetch(PDO::FETCH_ASSOC);
 
         $_SESSION['loggedin'] = true;
         $_SESSION['username'] = $row['name'];
@@ -20,12 +18,12 @@ if (isset($_POST['email'], $_POST['pass'])) {
 
         header("Location: /WAF/Code/index.php?page=search");
         exit;
-
     } else {
         header("Location: /WAF/Code/index.php?page=login&error=user");
         exit;
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
